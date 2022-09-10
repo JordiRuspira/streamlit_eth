@@ -5,7 +5,6 @@ Created on Tue Aug 16 00:42:24 2022
 @author: Jordi Garcia Ruspira
 """
 
-from plotly.subplots import make_subplots
 import streamlit as st
 import pandas as pd
 import requests
