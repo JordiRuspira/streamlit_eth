@@ -46,9 +46,10 @@ st.sidebar.markdown("# Kurama")
 st.sidebar.success("Hi! This is a simple version :) ")
  
  
-API_KEY = "3b5afbf4-3004-433c-9b04-2e867026718b"
+API_KEY = st.secrets["API_KEY"]
 
  
+
 
 
 SQL_QUERY_AUX = "select miner, difficulty, tx_count, size from  ethereum.core.fact_blocks where block_timestamp between '2022-01-01' and CURRENT_DATE     and miner in ('" 
@@ -234,7 +235,7 @@ with st.container():
     fig = go.Figure(data=go.Violin(y=df1['TX_COUNT'][df1['MINER'] == input_feature], box_visible=True, line_color='black',
                                meanline_visible=True, fillcolor='lightseagreen', opacity=0.6,
                                x0=input_feature))
-    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Plot Title",     xaxis_title="X Axis Title",     yaxis_title="Y Axis Title")
+    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Plot Title",     xaxis_title="Miner",     yaxis_title="Transaction count per block")
     st.plotly_chart(fig)
     
     
@@ -250,7 +251,7 @@ with st.container():
     fig = go.Figure(data=go.Violin(y=df1['DIFFICULTY'][df1['MINER'] == input_feature], box_visible=True, line_color='black',
                                meanline_visible=True, fillcolor='lightseagreen', opacity=0.6,
                                x0=input_feature))
-    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Plot Title",     xaxis_title="X Axis Title",     yaxis_title="Y Axis Title")
+    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Plot Title",     xaxis_title="Miner",     yaxis_title="Average difficulty per block")
     st.plotly_chart(fig)
     
     
@@ -269,7 +270,11 @@ with st.container():
     data1 = get_query_results(token)
     df1 = pd.DataFrame(data1['results'], columns = ['MINER','NUM_BLOCKS_MINED','AVERAGE_DIFFICULTY','AVG_TX_COUNT','RANK_NUM_BLOCKS','RANK_AVERAGE_DIFFICULTY','RANK_AVG_TX_COUNT']  ) 
      
+    st.markdown('The table below shows the different miners since start of 2022, with the number of blocks mined, average difficulty and average transaction per block.')
     st.dataframe(df1)
+    st.markdown('It`s interesting to see that the miners higher in rank when it comes to average transaction count (those which prefer blocks with more transactions), have a very low number of blocks mined, most of them with only one block mined.')
+    st.markdown('The two miners I`ve selected as default for this dashboard (0xea674fdde714fd979de3edf0f56aa9716b898ec8 and 0xea674fdde714fd979de3edf0f56aa9716b898ec8) seem of interest to me, because both of them have a very high number of blocks mined, and they have a significant difference when it comes to average number of transactions per block. The first one has 204 so far, and the second one has 158, but the first one ranks first when it comes to blocks mined, with more than 460k blocks mined throughout 2022, and despite this it prefers blocks with a higher number of transactions than 0x1ad91ee08f21be3de0ba2ba6918e714da6b45836.')
+    st.markdown('This second and last part of the dashboard is useful for a user which wants to compare two miners. They can do so by copying any of the miners they want to look at from the table above, and pasting them (plus pressing enter) in the markdown above too. ')
     
     rank_nblocks_miner_input_1 = df1['RANK_NUM_BLOCKS'][df1['MINER'] == input_feature ]
     dfaux = pd.DataFrame(data = rank_nblocks_miner_input_1)  
