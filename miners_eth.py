@@ -161,7 +161,7 @@ with st.container():
 
 with st.container():
    
-    st.markdown("In this dashboard we'll explore the main insights we can observe regarding miners behavior when it comes to transaction count per block and block difficulty.")
+    st.markdown("In this dashboard we'll explore the main insights we can observe regarding miners behavior when it comes to transaction count per block and block difficulty. Remember you can go to the top-right corner, select settings, and choose dark mode if you prefer it. ")
     st.text("")
     st.markdown("For starters, the time period defined (by myself) for this bounty has been since start of 2022, which I consider to be a sufficiently relevant time period to display the data.")
     st.text("")
@@ -235,32 +235,32 @@ with st.container():
     fig = go.Figure(data=go.Violin(y=df1['TX_COUNT'][df1['MINER'] == input_feature], box_visible=True, line_color='black',
                                meanline_visible=True, fillcolor='lightseagreen', opacity=0.6,
                                x0=input_feature))
-    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Plot Title",     xaxis_title="Miner",     yaxis_title="Transaction count per block")
+    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="First selected miner, transaction count violinplot",     xaxis_title="Miner",     yaxis_title="Transaction count per block")
     st.plotly_chart(fig)
     
     
     fig = go.Figure(data=go.Violin(y=df1['TX_COUNT'][df1['MINER'] == input_feature_2], box_visible=True, line_color='black',
                                meanline_visible=True, fillcolor='lightseagreen', opacity=0.6,
                                x0=input_feature_2))
-    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Plot Title",
-    xaxis_title="X Axis Title",
-    yaxis_title="Y Axis Title")
+    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Second selected miner, transaction count violinplot",
+    xaxis_title="Miner",
+    yaxis_title="Transaction count per block")
     st.plotly_chart(fig)
        
     
     fig = go.Figure(data=go.Violin(y=df1['DIFFICULTY'][df1['MINER'] == input_feature], box_visible=True, line_color='black',
                                meanline_visible=True, fillcolor='lightseagreen', opacity=0.6,
                                x0=input_feature))
-    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Plot Title",     xaxis_title="Miner",     yaxis_title="Average difficulty per block")
+    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="First selected miner, average difficulty violinplot",     xaxis_title="Miner",     yaxis_title="Average difficulty per block")
     st.plotly_chart(fig)
     
     
     fig = go.Figure(data=go.Violin(y=df1['DIFFICULTY'][df1['MINER'] == input_feature_2], box_visible=True, line_color='black',
                                meanline_visible=True, fillcolor='lightseagreen', opacity=0.6,
                                x0=input_feature_2))
-    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Plot Title",
-    xaxis_title="X Axis Title",
-    yaxis_title="Y Axis Title")
+    fig.update_layout(height=600, width=800, yaxis_zeroline=False, title="Second selected miner, average difficulty violinplot",
+    xaxis_title="Miner",
+    yaxis_title="Average difficulty per block")
     st.plotly_chart(fig)
     
     
